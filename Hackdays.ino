@@ -62,7 +62,7 @@ void loop() {
   delay(50);
   AdvancedWalking(74, 0, 45, -45, 90, 5);
 }
-//--------------------------------------------------------------------------------------Walking
+//--------------------------------------------------------------------------------------Walking (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| menge an schritten)
 void Walking(int Hhoch, int Hrunter , int SVorwärts, int SRückwärts, int steps) {
   ////////////////////////////////////////////////////laufen
   for ( int i = 0; i = < steps; i++) {
@@ -109,7 +109,7 @@ void Walking(int Hhoch, int Hrunter , int SVorwärts, int SRückwärts, int step
   ////////////////////////////////////////////////////nullstellung
   Nullstellen(0);
 }
-//--------------------------------------------------------------------------------------Advanced Walking
+//--------------------------------------------------------------------------------------Advanced Walking (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| erhebung menge| menge an schritten)
 void AdvancedWalking(int Hhoch, int Hrunter , int SVorwärts, int SRückwärts, int rise, int steps) {
   //////////////////////////////////////////////in position bringen
   //----------------------------A
