@@ -8,7 +8,9 @@
     13 ---> Servo
     ...
     2  ---> Servo
-    I am not getting triggered....
+    Free:
+    I2C
+    TX (1) / RX(0)
 */
 //----------------------------------Servo
 #include <Servo.h>
@@ -37,22 +39,23 @@ Servo servoGrnB3;
 */
 
 int nullstellung = 0;
+
 //--------------------------------------------------------------------------------------Setup
 void setup() {
   servoA1.attach(13);
-  servoA2.attach(12);
-  servoA3.attach(11);
+  servoA2.attach(10);
+  servoA3.attach(9);
 
-  servoB1.attach(10);
-  servoB2.attach(9);
-  servoB3.attach(8);
+  servoB1.attach(12);
+  servoB2.attach(5);
+  servoB3.attach(6);
 
   servoGrnA1.attach(7);
-  servoGrnA2.attach(6);
-  servoGrnA3.attach(5);
+  servoGrnA2.attach(4);
+  servoGrnA3.attach(3);
 
-  servoGrnB1.attach(4);
-  servoGrnB1.attach(3);
+  servoGrnB1.attach(6);
+  servoGrnB1.attach(5);
   servoGrnB1.attach(2);
 
 }
