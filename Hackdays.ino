@@ -28,13 +28,13 @@ Servo servoGrnA3;
 Servo servoGrnB1;
 Servo servoGrnB2;
 Servo servoGrnB3;
-
+/*
   int Hhigh = 90;
   int Hdown = 0;
 
   int SForwards = 45;
   int SBackwards = -45;
-
+*/
 
 int nullstellung = 0;
 //--------------------------------------------------------------------------------------Setup
@@ -112,7 +112,7 @@ void Walking(int Hhigh, int Hdown , int SForwards, int SBackwards, int steps) {
   }
 
   ////////////////////////////////////////////////////nullstellung
-  Nullstellen(0);
+  Nullstellen(90, 0, 45, -45, 0);
 }
 //--------------------------------------------------------------------------------------Advanced Walking (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| erhebung menge| menge an schritten)
 void AdvancedWalking(int Hhigh, int Hdown , int SForwards, int SBackwards, int rise, int steps) {
@@ -181,7 +181,7 @@ void AdvancedWalking(int Hhigh, int Hdown , int SForwards, int SBackwards, int r
     servoGrnA3.write(Hdown);
   }
   ////////////////////////////////////////////////////nullstellung
-  Nullstellen(0);
+  Nullstellen(90, 0, 45, -45, 0);
 
 }
 //--------------------------------------------------------------------------------------Turn (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| richtung| menge an schritten)
@@ -227,11 +227,11 @@ void Turning(int Hhigh, int Hdown, int SForwards, int SBackwards, String side, i
       servoGrnB3.write(Hdown); //runter
     }
   }
-  Nullstellen(0);
+  Nullstellen(90, 0, 45, -45, 0);
 
 }
-//--------------------------------------------------------------------------------------Nullstellen
-void Nullstellen(int nullstellung) {
+//--------------------------------------------------------------------------------------Nullstellen (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| nullstellung)
+void Nullstellen(int Hhigh, int Hdown, int SForwards, int SBackwards, int nullstellung) {
   //----------------------------A
   servoGrnA1.write(Hhigh); //hoch
   servoGrnA2.write(Hhigh);
