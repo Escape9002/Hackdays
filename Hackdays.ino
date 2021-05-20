@@ -28,13 +28,13 @@ Servo servoGrnA3;
 Servo servoGrnB1;
 Servo servoGrnB2;
 Servo servoGrnB3;
-/*
-  int Hhoch = 90;
-  int Hrunter = 0;
 
-  int SVorwärts = 45;
-  int SRückwärts = -45;
-*/
+  int Hhigh = 90;
+  int Hdown = 0;
+
+  int SForwards = 45;
+  int SBackwards = -45;
+
 
 int nullstellung = 0;
 //--------------------------------------------------------------------------------------Setup
@@ -59,153 +59,204 @@ void setup() {
 //--------------------------------------------------------------------------------------Loop
 void loop() {
   Walking(90, 0, 45, -45, 5);
-  delay(50);
+  delay(5000);
   AdvancedWalking(74, 0, 45, -45, 90, 5);
+  delay(5000);
+  Turning(90, 0, 45, -45, "Left", 10);
+  delay(5000);
+  Turning(90, 0, 45, -45, "Right", 10);
+  delay(5000);
 }
 //--------------------------------------------------------------------------------------Walking (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| menge an schritten)
-void Walking(int Hhoch, int Hrunter , int SVorwärts, int SRückwärts, int steps) {
+void Walking(int Hhigh, int Hdown , int SForwards, int SBackwards, int steps) {
   ////////////////////////////////////////////////////laufen
-  for ( int i = 0; i = < steps; i++) {
+  for ( int i = 0; i <= steps; i++) {
 
     //----------------------------A
-    servoGrnA1.write(Hhoch); //hoch
-    servoGrnA2.write(Hhoch);
-    servoGrnA3.write(Hhoch);
+    servoGrnA1.write(Hhigh); //hoch
+    servoGrnA2.write(Hhigh);
+    servoGrnA3.write(Hhigh);
 
-    servoA1.write(SVorwärts); //vorwärts
-    servoA1.write(SVorwärts);
-    servoA1.write(SVorwärts);
+    servoA1.write(SForwards); //vorwärts
+    servoA1.write(SForwards);
+    servoA1.write(SForwards);
 
     //----------------------------B
-    servoB1.write(SRückwärts);  //Rückwärts
-    servoB1.write(SRückwärts);
-    servoB1.write(SRückwärts);
+    servoB1.write(SBackwards);  //Rückwärts
+    servoB1.write(SBackwards);
+    servoB1.write(SBackwards);
 
     //----------------------------A
-    servoGrnA1.write(Hrunter); //runter
-    servoGrnA1.write(Hrunter);
-    servoGrnA1.write(Hrunter);
+    servoGrnA1.write(Hdown); //runter
+    servoGrnA1.write(Hdown);
+    servoGrnA1.write(Hdown);
 
     //----------------------------B
-    servoGrnB1.write(Hhoch); //hoch
-    servoGrnB2.write(Hhoch);
-    servoGrnB3.write(Hhoch);
+    servoGrnB1.write(Hhigh); //hoch
+    servoGrnB2.write(Hhigh);
+    servoGrnB3.write(Hhigh);
 
-    servoB1.write(SVorwärts);  //vorwärts
-    servoB1.write(SVorwärts);
-    servoB1.write(SVorwärts);
+    servoB1.write(SForwards);  //vorwärts
+    servoB1.write(SForwards);
+    servoB1.write(SForwards);
 
     //----------------------------A
-    servoA1.write(SRückwärts); //Rückwärts
-    servoA1.write(SRückwärts);
-    servoA1.write(SRückwärts);
+    servoA1.write(SBackwards); //Rückwärts
+    servoA1.write(SBackwards);
+    servoA1.write(SBackwards);
 
     //----------------------------B
-    servoGrnB1.write(Hrunter); //runter
-    servoGrnB1.write(Hrunter);
-    servoGrnB1.write(Hrunter);
+    servoGrnB1.write(Hdown); //runter
+    servoGrnB1.write(Hdown);
+    servoGrnB1.write(Hdown);
   }
 
   ////////////////////////////////////////////////////nullstellung
   Nullstellen(0);
 }
 //--------------------------------------------------------------------------------------Advanced Walking (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| erhebung menge| menge an schritten)
-void AdvancedWalking(int Hhoch, int Hrunter , int SVorwärts, int SRückwärts, int rise, int steps) {
+void AdvancedWalking(int Hhigh, int Hdown , int SForwards, int SBackwards, int rise, int steps) {
   //////////////////////////////////////////////in position bringen
   //----------------------------A
-  servoGrnA1.write(Hhoch); //hoch
-  servoGrnA2.write(Hhoch);
-  servoGrnA3.write(Hhoch);
+  servoGrnA1.write(Hhigh); //hoch
+  servoGrnA2.write(Hhigh);
+  servoGrnA3.write(Hhigh);
 
-  servoA1.write(SVorwärts); //vorwärts
-  servoA1.write(SVorwärts);
-  servoA1.write(SVorwärts);
+  servoA1.write(SForwards); //vorwärts
+  servoA1.write(SForwards);
+  servoA1.write(SForwards);
 
   //----------------------------B
-  servoB1.write(SRückwärts);  //Rückwärts
-  servoB1.write(SRückwärts);
-  servoB1.write(SRückwärts);
+  servoB1.write(SBackwards);  //Rückwärts
+  servoB1.write(SBackwards);
+  servoB1.write(SBackwards);
   //----------------------------A
-  servoGrnA1.write(Hrunter); //runter
-  servoGrnA1.write(Hrunter);
-  servoGrnA1.write(Hrunter);
+  servoGrnA1.write(Hdown); //runter
+  servoGrnA1.write(Hdown);
+  servoGrnA1.write(Hdown);
   //----------------------------A
   ////////////////////////////////////////////////laufen
-  for ( int i = 0; i = < steps; i++) {
+  for ( int i = 0; i <= steps; i++) {
     //----------------------------B
-    servoGrnB1.write(Hhoch); //hoch
-    servoGrnB2.write(Hhoch);
-    servoGrnB3.write(Hhoch);
+    servoGrnB1.write(Hhigh); //hoch
+    servoGrnB2.write(Hhigh);
+    servoGrnB3.write(Hhigh);
     //----------------------------A
     servoGrnA1.write(rise); //rise
     servoGrnA2.write(rise);
     servoGrnA3.write(rise);
 
-    servoA1.write(SRückwärts); //Rückwärts
-    servoA1.write(SRückwärts);
-    servoA1.write(SRückwärts);
+    servoA1.write(SBackwards); //Rückwärts
+    servoA1.write(SBackwards);
+    servoA1.write(SBackwards);
     //----------------------------B
-    servoB1.write(SVorwärts); //vorwärts
-    servoB1.write(SVorwärts);
-    servoB1.write(SVorwärts);
+    servoB1.write(SForwards); //vorwärts
+    servoB1.write(SForwards);
+    servoB1.write(SForwards);
 
-    servoGrnB1.write(Hrunter); //runter
-    servoGrnB2.write(Hrunter);
-    servoGrnB3.write(Hrunter);
+    servoGrnB1.write(Hdown); //runter
+    servoGrnB2.write(Hdown);
+    servoGrnB3.write(Hdown);
 
     //----------------------------------wiederholung Spiegelverkehrt
     //----------------------------A
-    servoGrnA1.write(Hhoch); //hoch
-    servoGrnA2.write(Hhoch);
-    servoGrnA3.write(Hhoch);
+    servoGrnA1.write(Hhigh); //hoch
+    servoGrnA2.write(Hhigh);
+    servoGrnA3.write(Hhigh);
     //----------------------------B
     servoGrnB1.write(rise); //rise
     servoGrnB2.write(rise);
     servoGrnB3.write(rise);
 
-    servoB1.write(SRückwärts); //Rückwärts
-    servoB1.write(SRückwärts);
-    servoB1.write(SRückwärts);
+    servoB1.write(SBackwards); //Rückwärts
+    servoB1.write(SBackwards);
+    servoB1.write(SBackwards);
     //----------------------------A
-    servoA1.write(SVorwärts); //vorwärts
-    servoA1.write(SVorwärts);
-    servoA1.write(SVorwärts);
+    servoA1.write(SForwards); //vorwärts
+    servoA1.write(SForwards);
+    servoA1.write(SForwards);
 
-    servoGrnA1.write(Hrunter); //runter
-    servoGrnA2.write(Hrunter);
-    servoGrnA3.write(Hrunter);
+    servoGrnA1.write(Hdown); //runter
+    servoGrnA2.write(Hdown);
+    servoGrnA3.write(Hdown);
   }
   ////////////////////////////////////////////////////nullstellung
+  Nullstellen(0);
+
+}
+//--------------------------------------------------------------------------------------Turn (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| richtung| menge an schritten)
+void Turning(int Hhigh, int Hdown, int SForwards, int SBackwards, String side, int steps) { 
+
+  servoGrnA2.write(Hhigh); //mitte hochfahren --> quadroped
+  servoGrnB2.write(Hhigh);
+  
+  if (side.equals("Left")) {
+  for (int i = 0; i <= steps; i++) {
+      servoGrnA1.write(Hhigh); //hoch
+      servoA1.write(SForwards); //zur seite
+      servoGrnA1.write(Hdown); //runter
+
+      servoGrnA3.write(Hhigh); //hoch
+      servoA3.write(SForwards); //zur seite
+      servoGrnA3.write(Hdown); //runter
+
+      servoGrnB1.write(Hhigh); //hoch
+      servoB1.write(SForwards); //zur seite
+      servoGrnB1.write(Hdown); //runter
+
+      servoGrnB3.write(Hhigh); //hoch
+      servoB3.write(SForwards); //zur seite
+      servoGrnB3.write(Hdown); //runter
+    }
+  } else if (side.equals("Right")) {
+  for (int i = 0; i <= steps; i++) {
+      servoGrnA1.write(Hhigh); //hoch
+      servoA1.write(SBackwards); //zur seite
+      servoGrnA1.write(Hdown); //runter
+
+      servoGrnA3.write(Hhigh); //hoch
+      servoA3.write(SBackwards); //zur seite
+      servoGrnA3.write(Hdown); //runter
+
+      servoGrnB1.write(Hhigh); //hoch
+      servoB1.write(SBackwards); //zur seite
+      servoGrnB1.write(Hdown); //runter
+
+      servoGrnB3.write(Hhigh); //hoch
+      servoB3.write(SBackwards); //zur seite
+      servoGrnB3.write(Hdown); //runter
+    }
+  }
   Nullstellen(0);
 
 }
 //--------------------------------------------------------------------------------------Nullstellen
 void Nullstellen(int nullstellung) {
   //----------------------------A
-  servoGrnA1.write(Hhoch); //hoch
-  servoGrnA2.write(Hhoch);
-  servoGrnA3.write(Hhoch);
+  servoGrnA1.write(Hhigh); //hoch
+  servoGrnA2.write(Hhigh);
+  servoGrnA3.write(Hhigh);
 
   servoA1.write(nullstellung); //vorwärts
   servoA1.write(nullstellung);
   servoA1.write(nullstellung);
 
-  servoGrnA1.write(Hrunter); //runter
-  servoGrnA1.write(Hrunter);
-  servoGrnA1.write(Hrunter);
+  servoGrnA1.write(Hdown); //runter
+  servoGrnA1.write(Hdown);
+  servoGrnA1.write(Hdown);
 
   //----------------------------B
-  servoGrnB1.write(Hhoch); //hoch
-  servoGrnB2.write(Hhoch);
-  servoGrnB3.write(Hhoch);
+  servoGrnB1.write(Hhigh); //hoch
+  servoGrnB2.write(Hhigh);
+  servoGrnB3.write(Hhigh);
 
   servoB1.write(nullstellung);  //vorwärts
   servoB1.write(nullstellung);
   servoB1.write(nullstellung);
 
-  servoGrnB1.write(Hrunter); //runter
-  servoGrnB1.write(Hrunter);
-  servoGrnB1.write(Hrunter);
+  servoGrnB1.write(Hdown); //runter
+  servoGrnB1.write(Hdown);
+  servoGrnB1.write(Hdown);
 }
 //--------------------------------------------------------Garbage
 /*
