@@ -1,21 +1,25 @@
 /*
- * Over engeneered timer!!!!
- * 
- * Button: D2
- * Buzzer: D3
- * LCD : I2C
- */
+   Over engeneered timer!!!!
 
+   Button: D2
+   Buzzer: D3
+   Rotary Angle: A0
+   LCD : I2C
+*/
+#define Poti A0
 
-int Buzzer = 2;
-int interruptPin = 3;
+int multiplikator = 10;
+
+#define Buzzer 2
+#define buzzes 3
+#define interruptPin 3
 
 volatile boolean btnStatus = false;
 
 long timer;
 long timerset;
 int wait = 5000;
-int timerdif = 350;
+int timerdif = 0;
 //-----------------------
 #include <Wire.h>
 #include "rgb_lcd.h"
@@ -28,30 +32,40 @@ const int colorB = 105;
 //-----------------------
 //----------------------------------------------SETUP
 void setup() {
-  Serial.begin(9600);
-
-  pinMode(Buzzer, OUTPUT);
-
-  pinMode(interruptPin, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(interruptPin), Btn, HIGH);
   //-----------------------LCD
   lcd.begin(16, 2);
   lcd.setRGB(colorR, colorG, colorB);
-  lcd.setCursor(0, 0);
-  lcd.print("Loading....");
+  lcd.setCursor(0, 1);
+  lcd.print("Loading...");
   //-----------------------LCD
-  delay(1000);
+
+  Serial.begin(9600);
+
+  pinMode(Buzzer, OUTPUT);
+  pinMode(Poti, INPUT);
+
+  pinMode(interruptPin, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), Btn, HIGH);
+
+  //delay(1000);
+  lcd.clear();
 }
 //----------------------------------------------SETUP
 //----------------------------------------------LOOP
 void loop() {
   timer = millis();
   debug();
+
+  wait = analogRead(Poti)* multiplikator;
   //-----------------------button
   if (timer > timerset && btnStatus) {
-    digitalWrite(Buzzer, HIGH);
+    for (int i = 0; i <= buzzes; i++) {
+      digitalWrite(Buzzer, HIGH);
+      delay(100);
+      digitalWrite(Buzzer, LOW);
+      delay(100);
+    }
     btnStatus = false;
-    delay(100);
   } else {
     digitalWrite(Buzzer, LOW);
   }
@@ -60,14 +74,16 @@ void loop() {
   timerdif = clamp(0, wait, (timerset - timer));
 
   //lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Time: " + String((timerdif + 999) / 1000));
   lcd.setCursor(0, 1);
-  lcd.print(timerdif);
+  lcd.print("LOL: " + String((wait/1000)));
   //-----------------------lcd output
 }
 //----------------------------------------------LOOP
 //----------------------------------------------Interrupt function
 void Btn() {
-  lcd.clear();
+  //lcd.clear();
   btnStatus = true;
   timerset = timer + wait;
 }
@@ -78,7 +94,7 @@ void debug() {
   Serial.println(info);
 }
 //----------------------------------------------debug
-//----------------------------------------------clamp
+//----------------------------------------------clamp   //sets value to own min/max
 int clamp(int min, int max, int var) {
 
   if (var < min) {
@@ -86,7 +102,6 @@ int clamp(int min, int max, int var) {
   } else if (var > max) {
     var = max;
   }
-
   return var;
 }
 //----------------------------------------------clamp
