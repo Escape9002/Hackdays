@@ -5,7 +5,7 @@
  *  
  *  Wiring of Arduino:
  *  
- *  B-)
+ *  I am not getting triggered....
  */
 
 void setup() {
