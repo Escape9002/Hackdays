@@ -1,5 +1,5 @@
 /*
-   Over engeneered timer!!!!
+   Over overengineered timer!!!!
 
    Button: D2
    Buzzer: D3
