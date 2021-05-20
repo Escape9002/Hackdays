@@ -29,6 +29,10 @@ Servo servoGrnB1;
 Servo servoGrnB2;
 Servo servoGrnB3;
 
+int Hrunter = 0;
+int Hhoch = 90;
+int winkel = ;
+
 void setup() {
  servoA1.attach(13);
  servoA2.attach(12);
@@ -49,8 +53,54 @@ void setup() {
 }
 
 void loop() {
-
+  Walking();
 }
+
+void Walking(){
+  //----------------------------A
+  servoGrnA1.write(0); //hoch
+  servoGrnA2.write(0);
+  servoGrnA3.write(0);
+
+  servoA1.write(45); //vorwärts
+  servoA1.write(45);
+  servoA1.write(45);
+
+  //----------------------------B
+  servoB1.write(-45);  //Rückwärts
+  servoB1.write(-45);
+  servoB1.write(-45);
+  //----------------------------B
+
+  //----------------------------A
+  servoGrnA1.write(90); //runter
+  servoGrnA1.write(90);
+  servoGrnA1.write(90);
+  //----------------------------A
+
+  //----------------------------B
+  servoGrnB1.write(0); //hoch
+  servoGrnB2.write(0);
+  servoGrnB3.write(0);
+
+  servoB1.write(45);  //vorwärts
+  servoB1.write(45);
+  servoB1.write(45);
+  //----------------------------B
+
+  //----------------------------A
+  servoA1.write(-45); //Rückwärts
+  servoA1.write(-45);
+  servoA1.write(-45);
+  //----------------------------A
+
+  servoGrnB1.write(90); //runter
+  servoGrnB1.write(90);
+  servoGrnB1.write(90);
+  
+}
+
+/*
 //--------------------------------------Vorwärts
 void GroupAForward() {
   servoGrnA1.write(0); //hoch
@@ -109,3 +159,4 @@ void GroupBBackwards() {
   servoGrnB1.write(90);
 }
 //--------------------------------------Rückwärts
+*/
