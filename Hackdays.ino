@@ -10,8 +10,27 @@
     2  ---> Servo
     Free:
     I2C
+    Analog 0-4
     TX (1) / RX(0)
+
+    HM-10- Module:
+    https://people.ece.cornell.edu/land/courses/ece4760/PIC32/uart/HM10/DSD%20TECH%20HM-10%20datasheet.pdf
+
+    Please do:
+    0. Uncomment BLE stuff [ID:2]
+    1. Send "AT" [receive "OK" else go for Link]
+    2. Set Service. Send "AT+22be0fa4-b99c-11eb-8529-0242ac130003" [receive "OK+Set:22be0fa4-b99c-11eb-8529-0242ac130003", else go for Link]
+    3. Set Characteristic. Send "AT+CHARa1baf394-b99c-11eb-8529-0242ac130003" [receive "OK+Set:a1baf394-b99c-11eb-8529-0242ac130003"]
+    4. Comment [ID:2]. Uncomment [ID:1] (!multiple lines of crac..code)
+    5.Working?? Yeahhaaaaa
+
 */
+//----------------------------------BLE
+#include <SoftwareSerial.h>
+SoftwareSerial HM10(A0, A1); // RX = 0, TX = 1
+
+char appData;
+String inData = "";
 //----------------------------------Servo
 #include <Servo.h>
 
@@ -42,6 +61,12 @@ int nullstellung = 0;
 
 //--------------------------------------------------------------------------------------Setup
 void setup() {
+  //------------------HM-10
+  Serial.begin(9600);
+  Serial.println("HM10 serial started at 9600");
+  HM10.begin(9600); // set HM10 serial at 9600 baud rate
+
+  //------------------Servo
   servoA1.attach(13);
   servoA2.attach(10);
   servoA3.attach(9);
@@ -61,6 +86,36 @@ void setup() {
 }
 //--------------------------------------------------------------------------------------Loop
 void loop() {
+  //------------------HM-10
+  /*  //BLE-Communication (ID:1)
+    HM10.listen();  // listen the HM10 port
+    while (HM10.available() > 0) {   // if HM10 sends something then read
+    appData = HM10.read();
+    inData = String(appData);  // save the data in string format
+    Serial.write(appData);
+    }
+  */
+
+  //AT-Command debugging (enable if debugging, only debug when no BLe-Connection) (ID:2)
+  /*
+    if (Serial.available()) {           // Read user input if available.
+    delay(10);
+    HM10.write(Serial.read());
+    }
+  */
+
+  /* //FernbedienungsCode falls BLE funktioniert (ID:1)
+    if (inData.equals("W")) {
+    AdvancedWalking(74, 0, 45, -45, 90, 1);
+    } else if (inData.equals("S")) {
+    AdvancedWalking(74, 0, -45, 45, 90, 1); //not sure if working, just changed the 45 to -45 and vise versa
+    } else if (inData.equals("A")) {
+    Turning(90, 0, 45, -45, "Left", 1);
+    } else if (inData.equals("D")) {
+    Turning(90, 0, 45, -45, "Right", 1);
+    }
+  */
+  //------------------ServoZeugs (run for function testing!)
   Walking(90, 0, 45, -45, 5);
   delay(5000);
   AdvancedWalking(74, 0, 45, -45, 90, 5);
@@ -196,13 +251,13 @@ void AdvancedWalking(int Hhigh, int Hdown , int SForwards, int SBackwards, int r
 
 }
 //--------------------------------------------------------------------------------------Turn (bein höhe | nullstellung der höhe| schrittweite Vorwärts| schrittweite Rückwärts| richtung| menge an schritten)
-void Turning(int Hhigh, int Hdown, int SForwards, int SBackwards, String side, int steps) { 
+void Turning(int Hhigh, int Hdown, int SForwards, int SBackwards, String side, int steps) {
 
   servoGrnA2.write(Hhigh); //mitte hochfahren --> quadroped
   servoGrnB2.write(Hhigh);
-  
+
   if (side.equals("Left")) {
-  for (int i = 0; i <= steps; i++) {
+    for (int i = 0; i <= steps; i++) {
       servoGrnA1.write(Hhigh); //hoch
       servoA1.write(SForwards); //zur seite
       servoGrnA1.write(Hdown); //runter
@@ -220,7 +275,7 @@ void Turning(int Hhigh, int Hdown, int SForwards, int SBackwards, String side, i
       servoGrnB3.write(Hdown); //runter
     }
   } else if (side.equals("Right")) {
-  for (int i = 0; i <= steps; i++) {
+    for (int i = 0; i <= steps; i++) {
       servoGrnA1.write(Hhigh); //hoch
       servoA1.write(SBackwards); //zur seite
       servoGrnA1.write(Hdown); //runter
