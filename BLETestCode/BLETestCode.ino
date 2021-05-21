@@ -8,8 +8,8 @@
     Please do:
     0. Uncomment BLE stuff [ID:2]
     1. Send "AT" [receive "OK" else go for Link]
-    2. Set Service. Send "AT+22be0fa4-b99c-11eb-8529-0242ac130003" [receive "OK+Set:22be0fa4-b99c-11eb-8529-0242ac130003", else go for Link]
-    3. Set Characteristic. Send "AT+CHARa1baf394-b99c-11eb-8529-0242ac130003" [receive "OK+Set:a1baf394-b99c-11eb-8529-0242ac130003"]
+    2. Set Service. Send "AT+22be0fa4-b99c-11eb-8529-0242ac130003" [receive "OK+Set:22be0fa4-b99c-11eb-8529-0242ac130003", else go for Link] AT+UUID?
+    3. Set Characteristic. Send "AT+CHARa1baf394-b99c-11eb-8529-0242ac130003" [receive "OK+Set:a1baf394-b99c-11eb-8529-0242ac130003"] AT+CHAR?
     4. Comment [ID:2]. Uncomment [ID:1] (!multiple lines of crac..code)
     5.Working?? Yeahhaaaaa
 
