@@ -20,7 +20,7 @@ int Hhigh = 0;
 int SBackwards = -45;
 
 
-setup() {
+void setup() {
   //------------------Servo
   servoA1.attach(13);
   servoA2.attach(10);
@@ -39,7 +39,7 @@ setup() {
   servoGrnB1.attach(2);
 }
 
-loop() {
+void loop() {
   servoGrnA1.write(Hhigh); //hoch
   servoGrnA2.write(Hhigh);
   servoGrnA3.write(Hhigh);
