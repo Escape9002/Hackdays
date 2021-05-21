@@ -60,6 +60,9 @@ Servo servoGrnB3;
 int nullstellung = 0;
 int pause = 5;
 
+int Offset11 = ;
+int Offset8 = ;
+
 //--------------------------------------------------------------------------------------Setup
 void setup() {
   //------------------HM-10
@@ -73,8 +76,8 @@ void setup() {
   servoA3.attach(9);
 
   servoB1.attach(12);
-  servoB2.attach(5);
-  servoB3.attach(6);
+  servoB2.attach(11);
+  servoB3.attach(8);
 
   servoGrnA1.attach(7);
   servoGrnA2.attach(4);
@@ -142,7 +145,7 @@ void Walking(int Hhigh, int Hdown , int SForwards, int SBackwards, int steps) {
     delay(pause);
     //----------------------------B
     servoB1.write(SBackwards);  //Rückwärts
-    servoB2.write(SBackwards);
+    servoB2.write(SBackwards + Offset11);
     servoB3.write(SBackwards);
     delay(pause);
     //----------------------------A
@@ -153,10 +156,10 @@ void Walking(int Hhigh, int Hdown , int SForwards, int SBackwards, int steps) {
     //----------------------------B
     servoGrnB1.write(Hhigh); //hoch
     servoGrnB2.write(Hhigh);
-    servoGrnB3.write(Hhigh);
+    servoGrnB3.write(Hhigh + Offset8);
     delay(pause);
     servoB1.write(SForwards);  //vorwärts
-    servoB2.write(SForwards);
+    servoB2.write(SForwards + Offset11);
     servoB3.write(SForwards);
     delay(pause);
     //----------------------------A
@@ -167,7 +170,7 @@ void Walking(int Hhigh, int Hdown , int SForwards, int SBackwards, int steps) {
     //----------------------------B
     servoGrnB1.write(Hdown); //runter
     servoGrnB2.write(Hdown);
-    servoGrnB3.write(Hdown);
+    servoGrnB3.write(Hdown + Offset8);
     delay(pause);
   }
 
@@ -188,7 +191,7 @@ void AdvancedWalking(int Hhigh, int Hdown , int SForwards, int SBackwards, int r
   delay(pause);
   //----------------------------B
   servoB1.write(SBackwards);  //Rückwärts
-  servoB2.write(SBackwards);
+  servoB2.write(SBackwards + Offset11);
   servoB3.write(SBackwards);
   delay(pause);
   //----------------------------A
@@ -202,7 +205,7 @@ void AdvancedWalking(int Hhigh, int Hdown , int SForwards, int SBackwards, int r
     //----------------------------B
     servoGrnB1.write(Hhigh); //hoch
     servoGrnB2.write(Hhigh);
-    servoGrnB3.write(Hhigh);
+    servoGrnB3.write(Hhigh + Offset8);
     delay(pause);
     //----------------------------A
     servoGrnA1.write(rise); //rise
@@ -219,12 +222,12 @@ void AdvancedWalking(int Hhigh, int Hdown , int SForwards, int SBackwards, int r
     delay(pause);
     //----------------------------B
     servoB1.write(SForwards); //vorwärts
-    servoB2.write(SForwards);
+    servoB2.write(SForwards + Offset11);
     servoB3.write(SForwards);
     delay(pause);
     servoGrnB1.write(Hdown); //runter
     servoGrnB2.write(Hdown);
-    servoGrnB3.write(Hdown);
+    servoGrnB3.write(Hdown + Offset8);
     delay(pause);
     //----------------------------------wiederholung Spiegelverkehrt
     //----------------------------A
@@ -235,15 +238,15 @@ void AdvancedWalking(int Hhigh, int Hdown , int SForwards, int SBackwards, int r
     //----------------------------B
     servoGrnB1.write(rise); //rise
     servoGrnB2.write(rise);
-    servoGrnB3.write(rise);
+    servoGrnB3.write(rise + Offset8);
     delay(pause);
     servoB1.write(SBackwards); //Rückwärts
-    servoB2.write(SBackwards);
+    servoB2.write(SBackwards + Offset11);
     servoB3.write(SBackwards);
     delay(pause);
     servoGrnB1.write(Hdown); //rise
     servoGrnB2.write(Hdown);
-    servoGrnB3.write(Hdown);
+    servoGrnB3.write(Hdown + Offset8);
     delay(pause);
     //----------------------------A
     servoA1.write(SForwards); //vorwärts
@@ -280,9 +283,9 @@ void Turning(int Hhigh, int Hdown, int SForwards, int SBackwards, String side, i
       servoB1.write(SForwards); //zur seite
       servoGrnB1.write(Hdown); //runter
       delay(pause);
-      servoGrnB3.write(Hhigh); //hoch
-      servoB3.write(SForwards); //zur seite
-      servoGrnB3.write(Hdown); //runter
+      servoGrnB3.write(Hhigh + Offset8); //hoch
+      servoB3.write(SForwards + Offset8); //zur seite
+      servoGrnB3.write(Hdown + Offset8); //runter
       delay(pause);
     }
   } else if (side.equals("Right")) {
@@ -299,9 +302,9 @@ void Turning(int Hhigh, int Hdown, int SForwards, int SBackwards, String side, i
       servoB1.write(SBackwards); //zur seite
       servoGrnB1.write(Hdown); //runter
       delay(pause);
-      servoGrnB3.write(Hhigh); //hoch
-      servoB3.write(SBackwards); //zur seite
-      servoGrnB3.write(Hdown); //runter
+      servoGrnB3.write(Hhigh + Offset8); //hoch
+      servoB3.write(SBackwards + Offset8); //zur seite
+      servoGrnB3.write(Hdown + Offset8); //runter
       delay(pause);
     }
   }
@@ -326,15 +329,15 @@ void Nullstellen(int Hhigh, int Hdown, int SForwards, int SBackwards, int nullst
   //----------------------------B
   servoGrnB1.write(Hhigh); //hoch
   servoGrnB2.write(Hhigh);
-  servoGrnB3.write(Hhigh);
+  servoGrnB3.write(Hhigh + Offset8);
   delay(pause);
   servoB1.write(nullstellung);  //vorwärts
-  servoB2.write(nullstellung);
+  servoB2.write(nullstellung + Offset11);
   servoB3.write(nullstellung);
   delay(pause);
   servoGrnB1.write(Hdown); //runter
   servoGrnB2.write(Hdown);
-  servoGrnB3.write(Hdown);
+  servoGrnB3.write(Hdown + Offset8);
   delay(pause);
 }
 //--------------------------------------------------------Garbage
