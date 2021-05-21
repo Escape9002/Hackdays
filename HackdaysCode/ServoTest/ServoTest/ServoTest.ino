@@ -17,7 +17,7 @@ Servo servoGrnB2;
 Servo servoGrnB3;
 
 int Hhigh = 0;
-int SBackwards = -45;
+int SBackwards = 0;
 int pause = 200;
 
 void setup() {
