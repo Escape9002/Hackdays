@@ -18,7 +18,7 @@ Servo servoGrnB3;
 
 int Hhigh = 0;
 int SBackwards = -45;
-
+int pause = 200;
 
 void setup() {
   //------------------Servo
@@ -43,16 +43,17 @@ void loop() {
   servoGrnA1.write(Hhigh); //hoch
   servoGrnA2.write(Hhigh);
   servoGrnA3.write(Hhigh);
-
+  delay(pause);
   servoB1.write(SBackwards);  //Rückwärts
   servoB2.write(SBackwards);
   servoB3.write(SBackwards);
-
+  delay(pause);
   servoGrnB1.write(Hhigh); //hoch
   servoGrnB2.write(Hhigh);
   servoGrnB3.write(Hhigh);
-
+  delay(pause);
   servoGrnB1.write(Hhigh); //hoch
   servoGrnB2.write(Hhigh);
   servoGrnB3.write(Hhigh);
+  delay(pause);
 }
